@@ -35,7 +35,7 @@ const CARDS = [
   {
     src: "/3.png",
     alt: "Dermoscopic lesion photo in a frame labeled lesion_0192.jpg",
-    className: "absolute top-0 left-0 w-[260px] rotate-[-6deg]",
+    className: "absolute top-0 left-0 w-[240px] rotate-[-6deg]",
     duration: 7,
   },
   {
@@ -64,7 +64,7 @@ const CARDS = [
   {
     src: "/5.png",
     alt: "Terminal-style panel showing the explain API drafting a clinical rationale",
-    className: "absolute right-0 bottom-0 z-20 w-[280px] rotate-[6deg]",
+    className: "absolute right-0 bottom-0 z-20 w-[250px] rotate-[6deg]",
     duration: 7.5,
     delay: 0.6,
   },
