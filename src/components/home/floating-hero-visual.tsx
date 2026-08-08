@@ -35,7 +35,7 @@ const CARDS = [
   {
     src: "/3.png",
     alt: "Dermoscopic lesion photo in a frame labeled lesion_0192.jpg",
-    className: "absolute top-0 left-0 w-[290px] rotate-[-6deg]",
+    className: "absolute top-0 left-0 w-[260px] rotate-[-6deg]",
     duration: 7,
   },
   {
