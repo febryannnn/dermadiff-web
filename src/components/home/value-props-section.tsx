@@ -21,7 +21,7 @@ const VALUES = [
     icon: ShieldWarning,
     title: "Safety",
     description:
-      "Escalate, never clear. DermaDiff is prompt-engineered to always surface concerning features — it never tells a clinician a lesion is safe.",
+      "Escalate, never clear. DermaDiff is prompt-engineered to always surface concerning features. It never tells a clinician a lesion is safe.",
   },
   {
     icon: NotePencil,
@@ -44,7 +44,7 @@ export function ValuePropsSection() {
               Four constraints the design won&apos;t trade away.
             </h2>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Positioned as a second opinion, not a diagnosis — the
+              Positioned as a second opinion, not a diagnosis. The
               clinician stays the one accountable for the call.
             </p>
           </div>

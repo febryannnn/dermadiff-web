@@ -94,7 +94,7 @@ export default function ResultsPage() {
         <p className="mt-3 text-muted-foreground">
           Five PanDerm ViT-Large runs, identical in every respect except the
           training data. Final model selection weighted malignant-class
-          recall over raw accuracy — the numbers below show why that
+          recall over raw accuracy. The numbers below show why that
           distinction mattered.
         </p>
       </div>
@@ -102,7 +102,7 @@ export default function ResultsPage() {
       <DocSection id="headline" eyebrow="01" title="Headline metrics">
         <p>
           Stable Diffusion XL fine-tuned with DoRA (Experiment E) came out
-          ahead on accuracy, weighted F1, and macro recall — but the
+          ahead on accuracy, weighted F1, and macro recall, but the
           margin over the simpler variants is modest, and it didn&apos;t
           win on every axis.
         </p>
@@ -121,7 +121,7 @@ export default function ResultsPage() {
               {AVG_DATA.map((row) => (
                 <TableRow key={row.exp}>
                   <TableCell className="font-medium text-foreground">
-                    {row.exp} —{" "}
+                    {row.exp}:{" "}
                     {EXPERIMENTS.find((e) => e.id === row.exp)?.label}
                   </TableCell>
                   <TableCell
@@ -154,8 +154,8 @@ export default function ResultsPage() {
           </Table>
         </div>
         <p className="mt-4">
-          Notably, macro recall — the metric that treats every class
-          equally regardless of how common it is — improved monotonically
+          Notably, macro recall (the metric that treats every class
+          equally regardless of how common it is) improved monotonically
           from A through E, even in Experiment B, where raw accuracy
           briefly dipped below baseline. Accuracy is dominated by the
           majority nevi class; macro recall is not, which is precisely why
@@ -165,8 +165,8 @@ export default function ResultsPage() {
 
       <DocSection id="per-class" eyebrow="02" title="Per-class recall">
         <p>
-          Recall — of the lesions that were actually a given class, how
-          many did the model catch — is the number that matters most for
+          Recall (of the lesions that were actually a given class, how
+          many did the model catch) is the number that matters most for
           the malignant and suspicious classes, where a miss is the
           costly failure mode.
         </p>
@@ -223,7 +223,7 @@ export default function ResultsPage() {
             <span>
               <strong className="text-foreground">Melanoma recall</strong>{" "}
               rose from 71.3% (baseline) to a high of 82.0% under SD 3.5
-              Large augmentation — the single largest swing on the class
+              Large augmentation, the single largest swing on the class
               where a miss matters most.
             </span>
           </li>
@@ -233,7 +233,7 @@ export default function ResultsPage() {
               <strong className="text-foreground">
                 Actinic keratosis and dermatofibroma
               </strong>{" "}
-              — the two most data-starved classes — saw the clearest,
+              (the two most data-starved classes) saw the clearest,
               most consistent gains across every augmented experiment:
               akiec recall reached 83.7% (from 73.5%), df reached 70.6%
               (from 58.8%).
@@ -246,7 +246,7 @@ export default function ResultsPage() {
                 Basal cell carcinoma recall didn&apos;t improve uniformly.
               </strong>{" "}
               It dropped under SDXL-LoRA (87.0%) and SD 3.5 (89.6%)
-              relative to the 90.9% baseline — but held at ~93.5% under
+              relative to the 90.9% baseline, but held at ~93.5% under
               both SD 2.1 and SDXL+DoRA. Swapping LoRA for DoRA on the
               same SDXL backbone (C → E) recovered exactly the recall
               LoRA had cost.
@@ -258,7 +258,7 @@ export default function ResultsPage() {
               <strong className="text-foreground">
                 Vascular lesion recall barely moved
               </strong>{" "}
-              (86.3–86.4% in every experiment) — it was already the
+              (86.3–86.4% in every experiment). It was already the
               easiest minority class to separate.
             </span>
           </li>
@@ -267,19 +267,19 @@ export default function ResultsPage() {
 
       <DocSection id="confusion" eyebrow="03" title="Confusion matrices">
         <p>
-          Rows are the actual class, columns the predicted class — the
+          Rows are the actual class, columns the predicted class. The
           diagonal is correct calls. Comparing the baseline against SD 3.5
           Large (Experiment D, the highest macro-F1 of the five) shows
           where the errors moved, not just whether accuracy went up.
         </p>
         <div className="mt-5 grid grid-cols-1 gap-8 lg:grid-cols-2">
           <ConfusionMatrix
-            title="Experiment A — Baseline"
+            title="Experiment A: Baseline"
             labels={CONFUSION_LABELS}
             matrix={CONFUSION_A}
           />
           <ConfusionMatrix
-            title="Experiment D — SD 3.5 Large"
+            title="Experiment D: SD 3.5 Large"
             labels={CONFUSION_LABELS}
             matrix={CONFUSION_D}
           />
@@ -290,7 +290,7 @@ export default function ResultsPage() {
           misread as benign keratosis and 23 as nevi. Experiment D
           correctly calls 137, cutting both confusions roughly in half
           (12 misread as bkl, 17 as nevi). Actinic keratosis follows the
-          same pattern — true positives rise from 36 to 38 out of 49.
+          same pattern: true positives rise from 36 to 38 out of 49.
         </p>
       </DocSection>
 
@@ -301,7 +301,7 @@ export default function ResultsPage() {
       >
         <p>
           FID and LPIPS measure how close the synthetic distribution is to
-          real dermoscopic images — lower is closer. MS-SSIM measures
+          real dermoscopic images (lower is closer). MS-SSIM measures
           structural similarity to real references. These are properties
           of the generator alone, independent of the downstream
           classifier.
@@ -320,7 +320,7 @@ export default function ResultsPage() {
               {GEN_QUALITY.map((row) => (
                 <TableRow key={row.exp}>
                   <TableCell className="font-medium text-foreground">
-                    {row.exp} —{" "}
+                    {row.exp}:{" "}
                     {EXPERIMENTS.find((e) => e.id === row.exp)?.label}
                   </TableCell>
                   <TableCell className="text-right font-mono">
@@ -338,7 +338,7 @@ export default function ResultsPage() {
           </Table>
         </div>
         <p className="mt-4">
-          The generator with the best (lowest) FID — SD 2.1, at 139.5 —
+          The generator with the best (lowest) FID (SD 2.1, at 139.5)
           was not the one that produced the best downstream classifier.
           SDXL+DoRA had a middling FID (177.6) but the best accuracy and
           macro recall of any experiment. Realistic-looking synthetic

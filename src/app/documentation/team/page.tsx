@@ -4,7 +4,7 @@ import { DocSection } from "@/components/docs/doc-section";
 export const metadata: Metadata = {
   title: "Team",
   description:
-    "The three-person team behind DermaDiff, and the four-week timeline the three parallel tracks ran on.",
+    "The three-person team behind DermaDiff, and the one-week sprint the three parallel tracks ran on.",
 };
 
 const TEAM = [
@@ -33,36 +33,32 @@ const TEAM = [
 
 const TIMELINE = [
   {
-    week: 1,
-    days: "1–5",
+    days: "Day 1",
     theme: "Setup",
     farel: "Dataset scraping, PanDerm setup, baseline classifier (Exp A)",
     jason: "Longitudinal dataset request, stratified split, PanDerm setup",
     ilyas: "Dataset exploration, environment and pipeline planning",
   },
   {
-    week: 2,
-    days: "6–10",
+    days: "Day 2–3",
     theme: "Fine-tuning",
     farel: "SD 2.1 LoRA pipeline and fine-tuning on all three datasets",
-    jason: "SDXL LoRA fine-tuning, hyperparameter tuning, 1x/2x generation",
-    ilyas: "SD 3.5 Large pipeline, LoRA training runs, generation evaluation",
+    jason: "SDXL LoRA and DoRA fine-tuning in parallel",
+    ilyas: "SD 3.5 Large LoRA pipeline and fine-tuning",
   },
   {
-    week: 3,
-    days: "11–15",
-    theme: "Evaluation",
-    farel: "Experiment C training, comparison tables, SD 2.1 deployed",
-    jason: "FID/LPIPS/SSIM across experiments, real-vs-synthetic grids, SDXL deployed",
-    ilyas: "Training-strategy iteration, F1/recall plots for SD 3.5",
+    days: "Day 4–5",
+    theme: "Train + evaluate",
+    farel: "Experiment B training, FID/LPIPS/SSIM for SD 2.1",
+    jason: "Experiment C and E training, FID/LPIPS/SSIM for both SDXL variants",
+    ilyas: "Experiment D training, FID/LPIPS/SSIM for SD 3.5, F1/recall plots",
   },
   {
-    week: 4,
-    days: "16–20",
+    days: "Day 6–7",
     theme: "Ship",
-    farel: "Site documentation, PanDerm classifier deployed, final presentation",
-    jason: "SDXL+DoRA experiment (E), cross-domain PAD-UFES-20 evaluation, methodology write-up",
-    ilyas: "Presentation slides, Medium write-up, paper draft",
+    farel: "Site documentation, PanDerm classifier deployed",
+    jason: "Cross-domain PAD-UFES-20 evaluation, methodology write-up",
+    ilyas: "Presentation slides, final write-up, paper draft",
   },
 ];
 
@@ -74,12 +70,12 @@ export default function TeamPage() {
           Team
         </div>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-          Three people, one month.
+          Three people, one week.
         </h1>
         <p className="mt-3 text-muted-foreground">
-          Three tracks ran in parallel through Weeks 1–2 — one fine-tuned
-          Stable Diffusion architecture each — then converged in Week 3 for
-          integration and cross-experiment comparison.
+          Three tracks ran in parallel for most of the week (one fine-tuned
+          Stable Diffusion architecture each), converging on the final two
+          days for cross-experiment evaluation and deployment.
         </p>
       </div>
 
@@ -112,27 +108,21 @@ export default function TeamPage() {
         </p>
       </DocSection>
 
-      <DocSection id="timeline" eyebrow="02" title="Four-week timeline">
+      <DocSection id="timeline" eyebrow="02" title="One-week timeline">
         <p>
-          Each person owned one diffusion architecture end to end — fine-tune,
-          generate, evaluate — before the team converged on a shared
-          comparison methodology.
+          Each person owned one diffusion architecture end to end (fine-tune,
+          generate, evaluate) in parallel, then the team converged on a
+          shared comparison methodology to close out the week.
         </p>
         <div className="mt-5 flex flex-col gap-4">
           {TIMELINE.map((row) => (
             <div
-              key={row.week}
+              key={row.days}
               className="rounded-lg border border-border bg-card p-5"
             >
               <div className="flex items-baseline gap-3">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-secondary font-mono text-xs text-muted-foreground">
-                  {row.week}
-                </span>
-                <h3 className="text-sm font-semibold text-foreground">
-                  Week {row.week}
-                </h3>
-                <span className="font-mono text-xs text-muted-foreground">
-                  Days {row.days}
+                <span className="font-mono text-sm font-medium text-foreground">
+                  {row.days}
                 </span>
                 <span className="ml-auto text-xs text-muted-foreground">
                   {row.theme}

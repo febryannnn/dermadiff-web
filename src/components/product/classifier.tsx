@@ -17,9 +17,9 @@ import { CLASS_INFO, TIER_STYLES } from "@/lib/classes";
 import { cn } from "@/lib/utils";
 
 const TIER_NOTE: Record<string, string> = {
-  high: "Malignant-tier top call — flagged for clinical review.",
-  moderate: "Suspicious tier — warrants a closer look.",
-  low: "Lower visual concern — clinical correlation is still advised.",
+  high: "Malignant-tier top call: flagged for clinical review.",
+  moderate: "Suspicious tier: warrants a closer look.",
+  low: "Lower visual concern: clinical correlation is still advised.",
 };
 
 function TopPredictionSummary({ result }: { result: PanDermResult }) {
@@ -242,14 +242,14 @@ export function Classifier() {
           {classifyStatus === "idle" && (
             <p className="text-sm text-muted-foreground">
               {file
-                ? "Ready — click Analyze image to run PanDerm ViT-Large."
+                ? "Ready: click Analyze image to run PanDerm ViT-Large."
                 : "Upload a dermoscopic image to see the seven-class probability distribution."}
             </p>
           )}
 
           {classifyStatus === "error" && (
             <p className="text-sm text-muted-foreground">
-              Classification didn&apos;t complete — see the error alongside
+              Classification didn&apos;t complete: see the error alongside
               the image.
             </p>
           )}

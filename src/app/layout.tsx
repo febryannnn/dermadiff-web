@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "DermaDiff — Interpretable skin lesion triage",
-    template: "%s — DermaDiff",
+    default: "DermaDiff · Interpretable skin lesion triage",
+    template: "%s · DermaDiff",
   },
   description:
-    "DermaDiff pairs a PanDerm vision transformer, trained with Stable Diffusion-augmented dermoscopic data, with MedGemma-generated clinical explanations — a fast, explainable second opinion for clinicians reading dermoscopy.",
+    "DermaDiff pairs a PanDerm vision transformer, trained with Stable Diffusion-augmented dermoscopic data, with MedGemma-generated clinical explanations, a fast, explainable second opinion for clinicians reading dermoscopy.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

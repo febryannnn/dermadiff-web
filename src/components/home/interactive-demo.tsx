@@ -24,7 +24,7 @@ const STEPS = [
     label: "Classify + localize",
     title: "Classify, then localize",
     description:
-      "A seven-class probability distribution comes back with an attention-rollout heatmap — the regions the transformer actually weighted, not a post-hoc approximation.",
+      "A seven-class probability distribution comes back with an attention-rollout heatmap (the regions the transformer actually weighted, not a post-hoc approximation).",
     tag: "196 patch tokens",
   },
   {
@@ -151,7 +151,7 @@ export function InteractiveDemo() {
 
           <Reveal delay={0.1}>
             <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_30px_60px_-30px_rgba(28,20,16,0.18)]">
-              <WindowChrome label={`dermadiff.app/product — ${step.label.toLowerCase()}`} />
+              <WindowChrome label={`dermadiff.app/product/${step.id}`} />
               <div className="relative flex min-h-[360px] items-center justify-center p-8">
                 <span className="absolute top-4 left-4 z-10 rounded-full border border-border bg-background/90 px-2.5 py-1 font-mono text-[10px] tracking-wide text-muted-foreground uppercase backdrop-blur-sm">
                   {step.tag}
@@ -161,7 +161,7 @@ export function InteractiveDemo() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src="/mel.jpg"
-                    alt="Placeholder dermoscopic image — replace with a real capture"
+                    alt="Placeholder dermoscopic image, replace with a real capture"
                     className="aspect-square w-full max-w-sm rounded-xl object-cover"
                   />
                 )}

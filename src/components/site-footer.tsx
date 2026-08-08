@@ -6,6 +6,7 @@ const PAGE_LINKS = [
   { href: "/", label: "Home" },
   { href: "/product", label: "Product" },
   { href: "/documentation", label: "Documentation" },
+  { href: "/experiences", label: "Experiences" },
 ];
 
 const BUILT_ON = [
@@ -14,7 +15,7 @@ const BUILT_ON = [
     href: "https://github.com/SiyuanYan1/PanDerm",
   },
   {
-    label: "PanDerm — Nature Medicine, 2025",
+    label: "PanDerm · Nature Medicine, 2025",
     href: "https://www.nature.com/articles/s41591-024-03399-4",
   },
   {
@@ -41,7 +42,7 @@ export function SiteFooter() {
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               An interpretable clinical decision-support tool for dermoscopic
-              skin lesion triage — a synthesis-augmented PanDerm classifier
+              skin lesion triage, a synthesis-augmented PanDerm classifier
               paired with MedGemma-generated clinical explanations.
             </p>
             <div className="mt-5 flex gap-2.5 rounded-lg border border-border bg-card px-3.5 py-3">
@@ -50,7 +51,7 @@ export function SiteFooter() {
                 className="mt-0.5 size-4 shrink-0 text-muted-foreground"
               />
               <p className="text-xs leading-relaxed text-muted-foreground">
-                Research prototype. Decision support only — not a diagnosis,
+                Research prototype. Decision support only, not a diagnosis,
                 and not a substitute for evaluation by a qualified clinician.
               </p>
             </div>
@@ -97,7 +98,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-border/70 pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
-            DermaDiff — M. I. Rusdi, A. F. Ghiffari P.A., J. Kumarkono ·
+            DermaDiff: M. I. Rusdi, A. F. Ghiffari P.A., J. Kumarkono ·
             Department of Informatics, Institut Teknologi Sepuluh Nopember
           </p>
           <p>Not a certified medical device.</p>

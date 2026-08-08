@@ -21,8 +21,8 @@ export function Hero() {
           </h1>
 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
-            DermaDiff pairs a PanDerm vision transformer — trained on
-            Stable&nbsp;Diffusion-augmented dermoscopic data — with a
+            DermaDiff pairs a PanDerm vision transformer (trained on
+            Stable&nbsp;Diffusion-augmented dermoscopic data) with a
             MedGemma-generated clinical explanation, so a seven-class
             classification comes with the visual evidence behind it, not
             just a label.
@@ -48,7 +48,7 @@ export function Hero() {
 
           <p className="mt-8 text-xs text-muted-foreground">
             Built on PanDerm ViT-Large (Yan et al., <em>Nature Medicine</em>,
-            2025) and MedGemma 4B-IT. Research prototype — decision support
+            2025) and MedGemma 4B-IT. Research prototype: decision support
             only, not a diagnosis.
           </p>
         </Reveal>

@@ -33,7 +33,7 @@ export default function ProductPage() {
           <AlertDescription>
             This is a research prototype for a qualified clinician&apos;s use, not
             a certified medical device. It accepts dermoscope-captured images
-            only — plain smartphone photos aren&apos;t yet supported, since
+            only. Plain smartphone photos aren&apos;t yet supported, since
             cross-domain accuracy hasn&apos;t been validated for safe triage.
             DermaDiff never states that a lesion is safe; it only ever
             escalates.

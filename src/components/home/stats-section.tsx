@@ -4,7 +4,7 @@ const STATS = [
   {
     value: "58:1",
     label: "Class imbalance in HAM10000",
-    detail: "Melanoma vs. nevi sample counts — the rarest, most dangerous classes are the hardest to learn.",
+    detail: "Melanoma vs. nevi sample counts: the rarest, most dangerous classes are the hardest to learn.",
   },
   {
     value: "~60%",
@@ -37,7 +37,7 @@ export function StatsSection() {
             </h2>
             <p className="mt-3 text-muted-foreground">
               Skewed training data degrades exactly the classes where a
-              missed call costs the most — and a black-box prediction gives
+              missed call costs the most, and a black-box prediction gives
               a clinician nothing to weigh it against.
             </p>
           </div>

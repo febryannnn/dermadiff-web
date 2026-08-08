@@ -14,7 +14,7 @@ export function CredibilitySection() {
         <Reveal>
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-muted-foreground">
-              Grounded in published, peer-reviewed foundations —
+              Grounded in published, peer-reviewed foundations:
             </p>
             <ul className="flex flex-wrap gap-2">
               {CITATIONS.map((citation) => (

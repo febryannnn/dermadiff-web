@@ -13,7 +13,7 @@ export function FinalCta() {
               Upload a dermoscopic image. See what the model sees.
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              A prediction, a heatmap, and a written rationale — usually
+              A prediction, a heatmap, and a written rationale, usually
               within a minute.
             </p>
           </div>

@@ -42,7 +42,7 @@ export async function classifyImage(
 ): Promise<PanDermResult> {
   if (!isApiConfigured()) {
     throw new ApiError(
-      "NEXT_PUBLIC_MODAL_API_URL isn't set — the classifier backend has no address to call.",
+      "NEXT_PUBLIC_MODAL_API_URL isn't set. The classifier backend has no address to call.",
     );
   }
   const form = new FormData();
@@ -64,7 +64,7 @@ export async function explainImage(
 ): Promise<ExplainResult> {
   if (!isApiConfigured()) {
     throw new ApiError(
-      "NEXT_PUBLIC_MODAL_API_URL isn't set — the classifier backend has no address to call.",
+      "NEXT_PUBLIC_MODAL_API_URL isn't set. The classifier backend has no address to call.",
     );
   }
   const form = new FormData();

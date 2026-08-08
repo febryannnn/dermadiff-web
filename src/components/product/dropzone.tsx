@@ -45,7 +45,7 @@ export function Dropzone({
         return;
       }
       if (file.size > MAX_BYTES) {
-        setError("That image is over 15MB — try a smaller export.");
+        setError("That image is over 15MB. Try a smaller export.");
         return;
       }
       setError(null);

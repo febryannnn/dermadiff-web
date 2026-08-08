@@ -17,7 +17,7 @@ import { CLASS_INFO, TIER_STYLES } from "@/lib/classes";
 export const metadata: Metadata = {
   title: "Documentation",
   description:
-    "How DermaDiff is built: pipeline, models, datasets, results, the team, and references — plus the class reference, limitations, and API used by the product.",
+    "How DermaDiff is built: pipeline, models, datasets, results, the team, and references, plus the class reference, limitations, and API used by the product.",
 };
 
 const DOC_LINKS = [
@@ -37,7 +37,7 @@ const DOC_LINKS = [
     href: "/documentation/team",
     title: "Team",
     description:
-      "Who built DermaDiff, and the four-week timeline the three parallel tracks ran on.",
+      "Who built DermaDiff, and the one-week sprint the three parallel tracks ran on.",
   },
   {
     href: "/documentation/references",
@@ -105,7 +105,7 @@ export default function DocumentationPage() {
           MedGemma-written clinical rationale grounded in the
           classifier&apos;s own attention pattern. It is positioned as a
           fast, always-available second opinion for clinicians with
-          dermoscope access — the clinician remains the accountable
+          dermoscope access. The clinician remains the accountable
           decision-maker in every case.
         </p>
       </div>
@@ -120,7 +120,7 @@ export default function DocumentationPage() {
         <p>
           Classification is limited to the seven-category HAM10000 taxonomy.
           DermaDiff&apos;s tiering below reflects clinical concern, not model
-          confidence — a low-tier prediction is never presented as a clean
+          confidence. A low-tier prediction is never presented as a clean
           bill of health.
         </p>
         <div className="mt-4 overflow-hidden rounded-lg border border-border">
@@ -159,10 +159,10 @@ export default function DocumentationPage() {
       <DocSection id="limitations" eyebrow="Reference" title="Limitations">
         <ul className="flex flex-col gap-3">
           {[
-            "Dermoscope images only. Plain smartphone photos aren't supported yet — cross-domain evaluation on PAD-UFES-20 showed accuracy degradation that isn't safe for triage.",
+            "Dermoscope images only. Plain smartphone photos aren't supported yet. Cross-domain evaluation on PAD-UFES-20 showed accuracy degradation that isn't safe for triage.",
             "Classification is limited to the seven HAM10000 categories; a lesion outside that taxonomy has no correct label to predict.",
             "This is decision support, not a replacement for evaluation by a qualified clinician.",
-            "Model selection during development prioritized sensitivity on the malignant classes over aggregate accuracy — DermaDiff would rather over-flag than miss a melanoma.",
+            "Model selection during development prioritized sensitivity on the malignant classes over aggregate accuracy. DermaDiff would rather over-flag than miss a melanoma.",
           ].map((item) => (
             <li key={item} className="flex gap-2.5 text-sm">
               <WarningCircle
@@ -212,7 +212,7 @@ image: <file>
         <div className="mt-3">
           <CodeBlock>{`Content-Type: multipart/form-data
 image: <file>
-panderm_result: <JSON string — the response body from /api/classify>
+panderm_result: <JSON string (the response body from /api/classify)>
 
 → 200 OK
 {

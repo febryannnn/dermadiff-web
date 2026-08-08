@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Table,
@@ -11,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { DocSection } from "@/components/docs/doc-section";
 import { FlowRow } from "@/components/docs/flow-row";
+import { TechLogo, type LogoSrc } from "@/components/tech-logo";
 
 export const metadata: Metadata = {
   title: "Methodology",
@@ -71,10 +73,12 @@ function Spec({ label, value }: { label: string; value: ReactNode }) {
 function ModelCard({
   name,
   role,
+  logos,
   children,
 }: {
   name: string;
   role: string;
+  logos?: { src: LogoSrc; alt: string }[];
   children: ReactNode;
 }) {
   return (
@@ -83,6 +87,13 @@ function ModelCard({
         <h3 className="text-base font-semibold text-foreground">{name}</h3>
         <span className="text-xs text-muted-foreground">{role}</span>
       </div>
+      {logos && (
+        <div className="mt-4 flex flex-wrap gap-2.5">
+          {logos.map((logo) => (
+            <TechLogo key={logo.src} src={logo.src} alt={logo.alt} />
+          ))}
+        </div>
+      )}
       <dl className="mt-4">{children}</dl>
     </div>
   );
@@ -100,7 +111,7 @@ export default function MethodologyPage() {
         </h1>
         <p className="mt-3 text-muted-foreground">
           All five experiments share the same PanDerm configuration, split,
-          and evaluation metrics — only the training data differs, which is
+          and evaluation metrics. Only the training data differs, which is
           what makes the comparison in{" "}
           <Link href="/documentation/results">Results</Link> meaningful.
         </p>
@@ -114,16 +125,19 @@ export default function MethodologyPage() {
         </p>
 
         <h3 className="mt-6 text-sm font-medium text-foreground">Training</h3>
-        <div className="mt-3">
-          <FlowRow
-            nodes={[
-              "5 minority classes (mel, bcc, akiec, df, vasc)",
-              "DoRA fine-tuning on Stable Diffusion",
-              "Synthetic images, 1:1 with real",
-              "+ HAM10000 majority classes (nv, bkl)",
-              "PanDerm ViT-Large fine-tuning",
-              "Best-validation checkpoint",
-            ]}
+        <p className="mt-2">
+          Three source datasets feed four differently fine-tuned diffusion
+          generators, each producing a synthetic set that gets combined with
+          the real data before training its own PanDerm run.
+        </p>
+        <div className="mt-4 overflow-hidden rounded-2xl border border-border">
+          <Image
+            src="/pipeline.png"
+            alt="Pipeline diagram: three source datasets feed four fine-tuned diffusion models, each producing a synthetic dataset that combines with the real data to train its own PanDerm ViT-Large run, evaluated across the five experiments."
+            width={3840}
+            height={2160}
+            sizes="(min-width: 1024px) 900px, 100vw"
+            className="h-auto w-full"
           />
         </div>
 
@@ -142,7 +156,7 @@ export default function MethodologyPage() {
           />
         </div>
         <p className="mt-6">
-          Only the inference pipeline runs when you use the product — the
+          Only the inference pipeline runs when you use the product. The
           classifier weights are already fixed. See{" "}
           <Link href="/product">the classifier</Link> to run it on an image.
         </p>
@@ -163,11 +177,11 @@ export default function MethodologyPage() {
             </TableHeader>
             <TableBody>
               {[
-                ["A — No augmentation", "Real HAM10000 images only (10,015 images)"],
-                ["B — Stable Diffusion 2.1", "Real + SD 2.1 LoRA-generated synthetic minority images"],
-                ["C — Stable Diffusion XL", "Real + SDXL LoRA-generated synthetic minority images"],
-                ["D — Stable Diffusion 3.5 Large", "Real + SD 3.5 Large LoRA-generated synthetic minority images"],
-                ["E — Stable Diffusion XL + DoRA", "Real + SDXL DoRA-generated synthetic minority images"],
+                ["A: No augmentation", "Real HAM10000 images only (10,015 images)"],
+                ["B: Stable Diffusion 2.1", "Real + SD 2.1 LoRA-generated synthetic minority images"],
+                ["C: Stable Diffusion XL", "Real + SDXL LoRA-generated synthetic minority images"],
+                ["D: Stable Diffusion 3.5 Large", "Real + SD 3.5 Large LoRA-generated synthetic minority images"],
+                ["E: Stable Diffusion XL + DoRA", "Real + SDXL DoRA-generated synthetic minority images"],
               ].map(([exp, data]) => (
                 <TableRow key={exp}>
                   <TableCell className="font-medium text-foreground">
@@ -182,8 +196,8 @@ export default function MethodologyPage() {
           </Table>
         </div>
         <p className="mt-4">
-          Experiment E isolates the fine-tuning method itself — same SDXL
-          backbone as C, swapping LoRA for DoRA — see{" "}
+          Experiment E isolates the fine-tuning method itself: same SDXL
+          backbone as C, swapping LoRA for DoRA. See{" "}
           <Link href="/documentation/results">Results</Link> for what that
           changed.
         </p>
@@ -228,7 +242,7 @@ export default function MethodologyPage() {
               label="Safety constraint"
               value={
                 <>
-                  Escalate-never-clear —{" "}
+                  Escalate-never-clear:{" "}
                   <span className="text-foreground">
                     never states that a lesion is safe
                   </span>
@@ -266,7 +280,7 @@ export default function MethodologyPage() {
             />
             <Spec
               label="Target classes"
-              value="mel, bcc, akiec, df, vasc — the five minority classes in HAM10000"
+              value="mel, bcc, akiec, df, vasc: the five minority classes in HAM10000"
             />
           </ModelCard>
         </div>
@@ -279,7 +293,7 @@ export default function MethodologyPage() {
           dataset. Synthetic images are generated at a 1:1 ratio with real
           images per minority class, then combined with HAM10000 to train
           the classifier. A 70/15/15 stratified split is used throughout,
-          and synthetic images are added only to the training set —
+          and synthetic images are added only to the training set:
           validation and test always evaluate against real images.
         </p>
 
@@ -406,7 +420,7 @@ export default function MethodologyPage() {
         <p>
           The heatmap is produced by{" "}
           <span className="text-foreground">attention rollout</span> (Abnar
-          &amp; Zuidema, 2020) — it traces how attention actually propagates
+          &amp; Zuidema, 2020). It traces how attention actually propagates
           through all 24 of PanDerm&apos;s transformer blocks, recursively
           multiplying each block&apos;s averaged, identity-augmented
           attention matrix into a single map of which input patches most
@@ -423,10 +437,118 @@ export default function MethodologyPage() {
         </p>
         <p>
           That heatmap, together with the full ranked probability
-          distribution, is what MedGemma reads to write its explanation —
-          so the written rationale and the visual overlay are describing
+          distribution, is what MedGemma reads to write its explanation, so
+          the written rationale and the visual overlay are describing
           the same underlying computation, not two independent analyses.
         </p>
+
+        <h3 className="mt-8 text-sm font-medium text-foreground">
+          MedGemma, the vision-language model behind the write-up
+        </h3>
+        <div className="dark mt-4 rounded-xl border border-border bg-background p-6 text-foreground">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <TechLogo src="/medgemma.png" alt="MedGemma" />
+            <TechLogo src="/hf.webp" alt="Hugging Face" />
+          </div>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Published on Hugging Face under Google&apos;s Health AI
+            Developer Foundations license.
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            MedGemma is Google&apos;s family of medical vision-language
+            models: Gemma checkpoints further tuned on medical image-text
+            pairs spanning dermatology, radiology, histopathology, and
+            ophthalmology. DermaDiff runs the 4B instruction-tuned variant,
+            small enough to respond in a few seconds per case, multimodal
+            enough to read the lesion photo and the attention-rollout
+            heatmap side by side, and instruction-tuned enough to write a
+            structured rationale instead of a single label.
+          </p>
+          <dl className="mt-4">
+            <Spec
+              label="Model card"
+              value={
+                <a
+                  href="https://huggingface.co/google/medgemma-4b-it"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  huggingface.co/google/medgemma-4b-it
+                </a>
+              }
+            />
+            <Spec
+              label="Hosting"
+              value="Self-hosted through transformers on the same GPU container that serves PanDerm, not called through a third-party API"
+            />
+          </dl>
+        </div>
+      </DocSection>
+
+      <DocSection id="deployment" eyebrow="06" title="Deployment & stack">
+        <p>
+          DermaDiff ships as two independently deployed pieces: this Next.js
+          frontend, and a Modal-hosted backend that runs both models on GPU.
+        </p>
+        <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <ModelCard
+            name="Frontend"
+            role="This site"
+            logos={[
+              { src: "/nextjs.jpeg", alt: "Next.js" },
+              { src: "/react.webp", alt: "React" },
+              { src: "/tailwind.webp", alt: "Tailwind CSS" },
+            ]}
+          >
+            <Spec
+              label="Framework"
+              value="Next.js 16 (App Router), React 19, TypeScript"
+            />
+            <Spec
+              label="Styling"
+              value="Tailwind CSS v4, shadcn/ui component primitives"
+            />
+            <Spec
+              label="Motion"
+              value="Framer Motion, for reveal and floating-card animation"
+            />
+            <Spec label="Icons" value="Phosphor Icons" />
+            <Spec
+              label="Data"
+              value="Calls the two Modal endpoints directly from the browser; no server-side API layer of its own"
+            />
+          </ModelCard>
+
+          <ModelCard
+            name="Backend"
+            role="Modal.com"
+            logos={[
+              { src: "/modal.svg", alt: "Modal" },
+              { src: "/fast_api.png", alt: "FastAPI" },
+            ]}
+          >
+            <Spec
+              label="Compute"
+              value="Serverless GPU containers, scaled to zero when idle"
+            />
+            <Spec
+              label="Serving"
+              value="FastAPI, two JSON endpoints: /api/classify and /api/explain"
+            />
+            <Spec
+              label="Models"
+              value="PanDerm ViT-Large and MedGemma 4B-IT, loaded once per container and reused across requests"
+            />
+            <Spec
+              label="Deploy"
+              value="A single modal deploy call builds the container image and publishes both endpoints behind one stable URL"
+            />
+            <Spec
+              label="Predecessor"
+              value="Replaced an earlier Gradio UI that served the same two models"
+            />
+          </ModelCard>
+        </div>
       </DocSection>
     </>
   );
