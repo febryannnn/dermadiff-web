@@ -20,14 +20,14 @@ export default function ProductPage() {
           <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
             Upload a dermoscopic image.
           </h1>
-          <p className="mt-3 text-muted-foreground">
+          <p className="mt-3 mb-5 text-muted-foreground">
             PanDerm classifies the lesion and localizes its own attention;
             MedGemma reads both, alongside the full probability spread, and
             writes the rationale.
           </p>
         </div>
 
-        <Alert className="mt-8 mb-10">
+        {/* <Alert className="mt-8 mb-10">
           <WarningCircle weight="bold" />
           <AlertTitle>Decision support, not a diagnosis</AlertTitle>
           <AlertDescription>
@@ -38,7 +38,7 @@ export default function ProductPage() {
             DermaDiff never states that a lesion is safe; it only ever
             escalates.
           </AlertDescription>
-        </Alert>
+        </Alert> */}
       </div>
 
       <Classifier />

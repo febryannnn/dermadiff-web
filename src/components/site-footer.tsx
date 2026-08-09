@@ -45,7 +45,7 @@ export function SiteFooter() {
               skin lesion triage, a synthesis-augmented PanDerm classifier
               paired with MedGemma-generated clinical explanations.
             </p>
-            <div className="mt-5 flex gap-2.5 rounded-lg border border-border bg-card px-3.5 py-3">
+            {/* <div className="mt-5 flex gap-2.5 rounded-lg border border-border bg-card px-3.5 py-3">
               <WarningCircle
                 weight="bold"
                 className="mt-0.5 size-4 shrink-0 text-muted-foreground"
@@ -54,7 +54,7 @@ export function SiteFooter() {
                 Research prototype. Decision support only, not a diagnosis,
                 and not a substitute for evaluation by a qualified clinician.
               </p>
-            </div>
+            </div> */}
           </div>
 
           <div>

@@ -17,7 +17,7 @@ export function Hero() {
           </div>
 
           <h1 className="mt-5 max-w-xl text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
-            Read the lesion. See the reasoning.
+            Classify the lesion. See the reasoning.
           </h1>
 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">

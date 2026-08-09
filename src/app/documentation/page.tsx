@@ -177,8 +177,8 @@ export default function DocumentationPage() {
 
       <DocSection id="api" eyebrow="Reference" title="API reference">
         <p>
-          The product page calls these two endpoints directly from the
-          browser. Both are hosted on Modal, alongside the model weights, so
+          The product page calls these endpoints directly from the browser.
+          All three are hosted on Modal, alongside the model weights, so
           there is no separate backend to run.
         </p>
 
@@ -187,7 +187,8 @@ export default function DocumentationPage() {
         </h3>
         <p className="mt-2">
           Runs PanDerm ViT-Large on an uploaded image and returns the
-          probability distribution and the attention-rollout heatmap.
+          probability distribution and the attention-rollout heatmap, JPEG
+          encoded and capped at 512px on the long edge.
         </p>
         <div className="mt-3">
           <CodeBlock>{`Content-Type: multipart/form-data
@@ -198,16 +199,46 @@ image: <file>
   "probs": { "mel": 0.62, "nv": 0.21, "bkl": 0.09, ... },
   "predicted_class": "mel",
   "predicted_prob": 0.62,
-  "heatmap_png_b64": "iVBORw0KGgoAAAANSUhEUgA..."
+  "heatmap_b64": "/9j/4AAQSkZJRgABAQAAAQABAAD...",
+  "heatmap_mime": "image/jpeg",
+  "heatmap_png_b64": "/9j/4AAQSkZJRgABAQAAAQABAAD..."
 }`}</CodeBlock>
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">
+          heatmap_png_b64 is kept as an alias of heatmap_b64 for older
+          callers, despite the name: read heatmap_mime rather than assuming
+          PNG.
+        </p>
+
+        <h3 className="mt-8 text-sm font-medium text-foreground">
+          POST /api/explain_stream
+        </h3>
+        <p className="mt-2">
+          Streams MedGemma 4B-IT&apos;s written rationale over the same
+          image, the heatmap, and the classification result, as
+          server-sent events. This is what the product page uses, so the
+          explanation renders as it&apos;s written instead of after the
+          full generation finishes.
+        </p>
+        <div className="mt-3">
+          <CodeBlock>{`Content-Type: multipart/form-data
+image: <file>
+panderm_result: <JSON string (the response body from /api/classify)>
+
+→ 200 OK, Content-Type: text/event-stream
+data: {"delta": "1. Morphological "}
+
+data: {"delta": "findings\\n..."}
+
+data: [DONE]`}</CodeBlock>
         </div>
 
         <h3 className="mt-8 text-sm font-medium text-foreground">
           POST /api/explain
         </h3>
         <p className="mt-2">
-          Runs MedGemma 4B-IT over the same image, the heatmap, and the
-          classification result to produce the written rationale.
+          Non-streaming counterpart to /api/explain_stream: same inputs,
+          returns the complete written rationale in one response.
         </p>
         <div className="mt-3">
           <CodeBlock>{`Content-Type: multipart/form-data

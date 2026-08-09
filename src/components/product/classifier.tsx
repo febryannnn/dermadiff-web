@@ -12,7 +12,11 @@ import { Dropzone } from "@/components/product/dropzone";
 import { HeatmapCompare } from "@/components/product/heatmap-compare";
 import { ProbabilityBars } from "@/components/product/probability-bars";
 import { ExplanationPanel } from "@/components/product/explanation-panel";
-import { classifyImage, explainImage, type PanDermResult } from "@/lib/api";
+import {
+  classifyImage,
+  explainImageStream,
+  type PanDermResult,
+} from "@/lib/api";
 import { CLASS_INFO, TIER_STYLES } from "@/lib/classes";
 import { cn } from "@/lib/utils";
 
@@ -34,15 +38,26 @@ function TopPredictionSummary({ result }: { result: PanDermResult }) {
         <span className="text-2xl font-semibold text-foreground">
           {info?.name ?? result.predicted_class}
         </span>
-        <span className="font-mono text-2xl text-primary tabular-nums">
-          {(result.predicted_prob * 100).toFixed(1)}%
-        </span>
+        <div className="text-right">
+          <span className="font-mono text-2xl text-primary tabular-nums">
+            {(result.predicted_prob * 100).toFixed(1)}%
+          </span>
+          <div className="font-mono text-[10px] tracking-wide text-muted-foreground uppercase">
+            Confidence
+          </div>
+        </div>
       </div>
       <Badge className={cn("mt-3", tier.badge)} variant="outline">
         {tier.label}
       </Badge>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
         {TIER_NOTE[info?.tier ?? "low"]}
+      </p>
+      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+        Confidence is PanDerm&apos;s own softmax score, how strongly it
+        favors this label over the other six, not a calibrated probability
+        that the lesion actually is that condition. The same caveat applies
+        to every percentage in the breakdown below.
       </p>
     </div>
   );
@@ -121,11 +136,21 @@ export function Classifier() {
   ) {
     setExplainStatus("loading");
     setExplainError(null);
+    let text = "";
     try {
-      const res = await explainImage(targetFile, result);
+      await explainImageStream(targetFile, result, (delta) => {
+        if (genRef.current !== gen) return;
+        text += delta;
+        // First delta flips the panel from the loading skeleton to live
+        // text, so reading starts while MedGemma is still writing.
+        setExplainText(text);
+        setExplainStatus("done");
+      });
       if (genRef.current !== gen) return;
-      setExplainText(res.explanation);
-      setExplainStatus("done");
+      if (!text) {
+        setExplainError("MedGemma didn't return an explanation.");
+        setExplainStatus("error");
+      }
     } catch (err) {
       if (genRef.current !== gen) return;
       setExplainError(
@@ -163,7 +188,9 @@ export function Classifier() {
   }
 
   const heatmapSrc = classifyResult
-    ? `data:image/png;base64,${classifyResult.heatmap_png_b64}`
+    ? `data:${classifyResult.heatmap_mime ?? "image/png"};base64,${
+        classifyResult.heatmap_b64 ?? classifyResult.heatmap_png_b64
+      }`
     : null;
 
   return (

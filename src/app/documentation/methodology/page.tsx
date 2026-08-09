@@ -490,7 +490,17 @@ export default function MethodologyPage() {
           DermaDiff ships as two independently deployed pieces: this Next.js
           frontend, and a Modal-hosted backend that runs both models on GPU.
         </p>
-        <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="mt-4 rounded-2xl border border-border bg-background p-6 sm:p-10">
+          <Image
+            src="/architecture.png"
+            alt="DermaDiff system architecture: the Next.js frontend calling the Modal-hosted FastAPI backend, which serves PanDerm ViT-Large and MedGemma 4B-IT on separate GPU containers."
+            width={5350}
+            height={4490}
+            sizes="(min-width: 1024px) 820px, 100vw"
+            className="h-auto w-full"
+          />
+        </div>
+        <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
           <ModelCard
             name="Frontend"
             role="This site"
@@ -533,7 +543,7 @@ export default function MethodologyPage() {
             />
             <Spec
               label="Serving"
-              value="FastAPI, two JSON endpoints: /api/classify and /api/explain"
+              value="FastAPI, three JSON endpoints: /api/classify, /api/explain, and /api/explain_stream"
             />
             <Spec
               label="Models"

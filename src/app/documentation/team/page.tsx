@@ -12,21 +12,21 @@ const TEAM = [
     initials: "FF",
     name: "Farel Febryan Ghiffari P.A.",
     id: "5025241137",
-    track: "Fine-tuned Stable Diffusion 2.1",
+    // track: "Fine-tuned Stable Diffusion 2.1",
     tone: "bg-risk-info text-risk-info-foreground",
   },
   {
     initials: "JK",
     name: "Jason Kumarkono",
     id: "5025241105",
-    track: "Fine-tuned Stable Diffusion XL (LoRA + DoRA)",
+    // track: "Fine-tuned Stable Diffusion XL (LoRA + DoRA)",
     tone: "bg-risk-moderate text-risk-moderate-foreground",
   },
   {
     initials: "IR",
     name: "M. Ilyas Rusdi",
     id: "5025241007",
-    track: "Fine-tuned Stable Diffusion 3.5 Large",
+    // track: "Fine-tuned Stable Diffusion 3.5 Large",
     tone: "bg-risk-low text-risk-low-foreground",
   },
 ];
@@ -97,9 +97,6 @@ export default function TeamPage() {
               <p className="font-mono text-xs text-muted-foreground">
                 {member.id}
               </p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {member.track}
-              </p>
             </div>
           ))}
         </div>
@@ -108,7 +105,7 @@ export default function TeamPage() {
         </p>
       </DocSection>
 
-      <DocSection id="timeline" eyebrow="02" title="One-week timeline">
+      {/* <DocSection id="timeline" eyebrow="02" title="One-week timeline">
         <p>
           Each person owned one diffusion architecture end to end (fine-tune,
           generate, evaluate) in parallel, then the team converged on a
@@ -157,7 +154,7 @@ export default function TeamPage() {
             </div>
           ))}
         </div>
-      </DocSection>
+      </DocSection> */}
     </>
   );
 }
