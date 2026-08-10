@@ -250,7 +250,7 @@ export default function MethodologyPage() {
             />
             <Spec
               label="Output structure"
-              value="Morphological findings → heatmap interpretation → reasoning for top prediction → differential reasoning → overall assessment"
+              value="ABCD rule assessment (Stolz dermoscopy score) → heatmap interpretation → reasoning for top prediction → differential reasoning → overall assessment"
             />
             <Spec
               label="Safety constraint"

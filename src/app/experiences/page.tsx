@@ -30,6 +30,13 @@ const PHOTO_FEATURED = {
 
 const REVIEWS = [
   {
+    name: "dr. Rina Munirah Bulqini, M.K.M, Sp.DVE",
+    role: "Dermatologist and Venereologist",
+    photo: "/dr-rina.jpeg",
+    quote:
+      "Menurut saya, aplikasi DermaDiff ini ke depannya akan jauh lebih aplikatif jika pengembangannya difokuskan agar bisa memproses foto dari kamera HP biasa, bukan hanya bergantung pada hasil dermoskopi. Di lapangan, ketersediaan alat dermoskopi itu sangat terbatas, apalagi di poli BPJS, RS tipe C, atau bahkan RS tipe B; tidak semua dokter Sp.DVE memilikinya karena harganya yang bervariasi. Jika bisa menggunakan kamera biasa, aplikasi ini tentu akan sangat memudahkan sasarannya, seperti peserta didik spesialis atau dokter yang berminat di sub-divisi tumor bedah kulit. Selain itu, saya melihat aplikasi ini belum menyertakan ABCD rule yang biasanya kami pakai sebagai standar pembacaan klinis, sehingga akan sangat baik jika parameter tersebut bisa diintegrasikan ke depannya.",
+  },
+  {
     name: "Zacky Anfasa Ahmad",
     role: "Mahasiswa Fakultas Kedokteran Universitas Brawijaya",
     photo: "/zacky-anfasa.JPG",
@@ -145,26 +152,45 @@ export default function ExperiencesPage() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {REVIEWS.map((review) => (
-              <div
-                key={review.name}
-                className="flex flex-col rounded-2xl border border-border bg-card p-6"
-              >
-                <Quotes
-                  weight="fill"
-                  className="size-5 text-muted-foreground/30"
-                />
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground">
-                  {review.quote}
-                </p>
-                <ByLine
-                  name={review.name}
-                  role={review.role}
-                  photo={review.photo}
-                />
-              </div>
-            ))}
+          <div className="mt-6 flex flex-col gap-4">
+            {/* dr. Rina — full width */}
+            <div className="flex flex-col rounded-2xl border border-border bg-card p-6">
+              <Quotes
+                weight="fill"
+                className="size-5 text-muted-foreground/30"
+              />
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground">
+                {REVIEWS[0].quote}
+              </p>
+              <ByLine
+                name={REVIEWS[0].name}
+                role={REVIEWS[0].role}
+                photo={REVIEWS[0].photo}
+              />
+            </div>
+
+            {/* Zacky & Faiz — 2 columns */}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {REVIEWS.slice(1).map((review) => (
+                <div
+                  key={review.name}
+                  className="flex flex-col rounded-2xl border border-border bg-card p-6"
+                >
+                  <Quotes
+                    weight="fill"
+                    className="size-5 text-muted-foreground/30"
+                  />
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground">
+                    {review.quote}
+                  </p>
+                  <ByLine
+                    name={review.name}
+                    role={review.role}
+                    photo={review.photo}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
       </div>

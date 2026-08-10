@@ -39,9 +39,9 @@ const STEPS = [
 ];
 
 const EXPLANATION_PREVIEW = [
-  "1. Morphological findings",
-  "   Asymmetric lesion, irregular border, mixed",
-  "   pigment network with a blue-white veil...",
+  "1. ABCD rule assessment (dermoscopy)",
+  "   A: 2/2 asymmetric axes  B: 6/8 abrupt border",
+  "   C: 4 colors  D: 3 structures  TDS: 6.1 (>5.45)",
   "",
   "2. Heatmap interpretation",
   "   Attention concentrates on the darkest,",

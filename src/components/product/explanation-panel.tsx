@@ -1,11 +1,62 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { ArrowClockwise } from "@phosphor-icons/react/dist/ssr/ArrowClockwise";
 import { WarningCircle } from "@phosphor-icons/react/dist/ssr/WarningCircle";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { parseExplanation } from "@/lib/parse-explanation";
+
+// MedGemma writes plain text but still slips into markdown occasionally
+// (**bold**, "* " bullets) despite instructions not to — LLMs reliably do
+// this. Rather than fight it in the prompt, render the two markers it
+// actually uses instead of showing literal asterisks.
+function renderInline(text: string): ReactNode {
+  return text
+    .split(/\*\*([^*]+)\*\*/g)
+    .map((part, i) =>
+      i % 2 === 1 ? (
+        <strong key={i} className="font-semibold text-foreground">
+          {part}
+        </strong>
+      ) : (
+        part
+      ),
+    );
+}
+
+function renderBody(body: string): ReactNode {
+  const blocks: { type: "list" | "p"; lines: string[] }[] = [];
+
+  for (const rawLine of body.split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    const bullet = line.match(/^[*-]\s+(.*)$/);
+    const last = blocks[blocks.length - 1];
+    if (bullet) {
+      if (last?.type === "list") last.lines.push(bullet[1]);
+      else blocks.push({ type: "list", lines: [bullet[1]] });
+    } else if (last?.type === "p") {
+      last.lines.push(line);
+    } else {
+      blocks.push({ type: "p", lines: [line] });
+    }
+  }
+
+  return blocks.map((block, i) =>
+    block.type === "list" ? (
+      <ul key={i} className="list-disc space-y-1 pl-4">
+        {block.lines.map((l, j) => (
+          <li key={j}>{renderInline(l)}</li>
+        ))}
+      </ul>
+    ) : (
+      <p key={i} className="whitespace-pre-line">
+        {renderInline(block.lines.join("\n"))}
+      </p>
+    ),
+  );
+}
 
 const LOADING_MESSAGES = [
   "Analyzing dermoscopic morphology",
@@ -91,9 +142,7 @@ export function ExplanationPanel({
   if (!structured) {
     return (
       <div className="space-y-3 text-sm leading-relaxed text-foreground/90">
-        {(text ?? "").split(/\n{2,}/).map((para, i) => (
-          <p key={i}>{para}</p>
-        ))}
+        {renderBody(text ?? "")}
       </div>
     );
   }
@@ -112,9 +161,9 @@ export function ExplanationPanel({
               </h4>
             </div>
           )}
-          <p className="mt-1.5 pl-7 text-sm leading-relaxed text-foreground/85">
-            {section.body}
-          </p>
+          <div className="mt-1.5 space-y-2 pl-7 text-sm leading-relaxed text-foreground/85">
+            {renderBody(section.body)}
+          </div>
         </div>
       ))}
     </div>

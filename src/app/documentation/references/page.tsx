@@ -36,6 +36,14 @@ const PAPERS: Paper[] = [
     url: "https://arxiv.org/abs/2604.05081",
   },
   {
+    authors: "Stolz, W. et al.",
+    title:
+      "The ABCD rule of dermatoscopy: high prospective value in the diagnosis of doubtful melanocytic skin lesions",
+    venue: "Journal of the American Academy of Dermatology 32(4), 1994",
+    tag: "Explanation",
+    url: "https://doi.org/10.1016/0190-9622(94)70061-3",
+  },
+  {
     authors: "Tschandl, P., Rosendahl, C. & Kittler, H.",
     title: "The HAM10000 dataset",
     venue: "Scientific Data 5, 180161, 2018",

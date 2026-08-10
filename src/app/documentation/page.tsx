@@ -226,9 +226,9 @@ image: <file>
 panderm_result: <JSON string (the response body from /api/classify)>
 
 → 200 OK, Content-Type: text/event-stream
-data: {"delta": "1. Morphological "}
+data: {"delta": "1. ABCD rule "}
 
-data: {"delta": "findings\\n..."}
+data: {"delta": "assessment\\n..."}
 
 data: [DONE]`}</CodeBlock>
         </div>
@@ -247,7 +247,7 @@ panderm_result: <JSON string (the response body from /api/classify)>
 
 → 200 OK
 {
-  "explanation": "1. Morphological findings\\n..."
+  "explanation": "1. ABCD rule assessment\\n..."
 }`}</CodeBlock>
         </div>
       </DocSection>
