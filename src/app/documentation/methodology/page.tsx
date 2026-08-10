@@ -13,6 +13,7 @@ import {
 import { DocSection } from "@/components/docs/doc-section";
 import { FlowRow } from "@/components/docs/flow-row";
 import { TechLogo, type LogoSrc } from "@/components/tech-logo";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Methodology",
@@ -59,10 +60,23 @@ const PANDERM_TRAIN_TOTAL = {
   nv: "6,705",
 };
 
-function Spec({ label, value }: { label: string; value: ReactNode }) {
+function Spec({
+  label,
+  value,
+  labelClassName,
+}: {
+  label: string;
+  value: ReactNode;
+  labelClassName?: string;
+}) {
   return (
     <div className="flex flex-col gap-1 border-b border-border py-2.5 last:border-0 sm:flex-row sm:items-baseline sm:gap-4">
-      <dt className="w-full shrink-0 font-mono text-xs text-muted-foreground sm:w-52">
+      <dt
+        className={cn(
+          "w-full shrink-0 font-mono text-xs text-muted-foreground sm:w-52",
+          labelClassName,
+        )}
+      >
         {label}
       </dt>
       <dd className="text-sm text-foreground">{value}</dd>
@@ -511,19 +525,27 @@ export default function MethodologyPage() {
             ]}
           >
             <Spec
+              labelClassName="sm:w-24"
               label="Framework"
               value="Next.js 16 (App Router), React 19, TypeScript"
             />
             <Spec
+              labelClassName="sm:w-24"
               label="Styling"
               value="Tailwind CSS v4, shadcn/ui component primitives"
             />
             <Spec
+              labelClassName="sm:w-24"
               label="Motion"
               value="Framer Motion, for reveal and floating-card animation"
             />
-            <Spec label="Icons" value="Phosphor Icons" />
             <Spec
+              labelClassName="sm:w-24"
+              label="Icons"
+              value="Phosphor Icons"
+            />
+            <Spec
+              labelClassName="sm:w-24"
               label="Data"
               value="Calls the two Modal endpoints directly from the browser; no server-side API layer of its own"
             />
@@ -538,22 +560,27 @@ export default function MethodologyPage() {
             ]}
           >
             <Spec
+              labelClassName="sm:w-24"
               label="Compute"
               value="Serverless GPU containers, scaled to zero when idle"
             />
             <Spec
+              labelClassName="sm:w-24"
               label="Serving"
               value="FastAPI, three JSON endpoints: /api/classify, /api/explain, and /api/explain_stream"
             />
             <Spec
+              labelClassName="sm:w-24"
               label="Models"
               value="PanDerm ViT-Large and MedGemma 4B-IT, loaded once per container and reused across requests"
             />
             <Spec
+              labelClassName="sm:w-24"
               label="Deploy"
               value="A single modal deploy call builds the container image and publishes both endpoints behind one stable URL"
             />
             <Spec
+              labelClassName="sm:w-24"
               label="Predecessor"
               value="Replaced an earlier Gradio UI that served the same two models"
             />
