@@ -34,7 +34,7 @@ const REVIEWS = [
     role: "Dermatologist and Venereologist",
     photo: "/dr-rina.jpeg",
     quote:
-      "Menurut saya, aplikasi DermaDiff ini ke depannya akan jauh lebih aplikatif jika pengembangannya difokuskan agar bisa memproses foto dari kamera HP biasa, bukan hanya bergantung pada hasil dermoskopi. Di lapangan, ketersediaan alat dermoskopi itu sangat terbatas, apalagi di poli BPJS, RS tipe C, atau bahkan RS tipe B; tidak semua dokter Sp.DVE memilikinya karena harganya yang bervariasi. Jika bisa menggunakan kamera biasa, aplikasi ini tentu akan sangat memudahkan sasarannya, seperti peserta didik spesialis atau dokter yang berminat di sub-divisi tumor bedah kulit. Selain itu, saya melihat aplikasi ini belum menyertakan ABCD rule yang biasanya kami pakai sebagai standar pembacaan klinis, sehingga akan sangat baik jika parameter tersebut bisa diintegrasikan ke depannya.",
+      "Menurut saya, aplikasi DermaDiff sudah bisa menjelaskan hasil analisis klasifikasi lesi kulit menggunakan ABCD rules yang biasanya kami pakai sebagai standar pembacaan klinis, sehingga sudah sesuai dengan standar di bidang dermatologi, akan tetapi ke depannya akan jauh lebih aplikatif jika pengembangannya difokuskan agar bisa memproses foto dari kamera HP biasa, bukan hanya bergantung pada hasil dermoskopi. Di lapangan, ketersediaan alat dermoskopi itu sangat terbatas, apalagi di poli BPJS, RS tipe C, atau bahkan RS tipe B; tidak semua dokter Sp.DVE memilikinya karena harganya yang bervariasi. Jika bisa menggunakan kamera biasa, aplikasi ini tentu akan sangat memudahkan sasarannya, seperti peserta didik spesialis atau dokter yang berminat di sub-divisi tumor bedah kulit.",
   },
   {
     name: "Zacky Anfasa Ahmad",
